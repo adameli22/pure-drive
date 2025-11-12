@@ -1,0 +1,37 @@
+.hero_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-height: 832px;
+    .hero_title_container {
+        background: blue;
+    }
+
+    .hero_images {
+        margin-right: 50px;
+        position: relative;
+           /* scales with viewport width */
+        height: 80vw;
+        max-height: 570px;
+
+        background: red;
+        img {
+            border-radius: 100%;
+        }
+        .circle_image_small {
+            position:absolute;
+            max-width: 217px;
+            transition: all 0.3s ease;
+        }
+        .circle_image_large {
+            position:absolute;
+            max-width: 305px;
+            transition: all 0.3s ease;
+
+        }
+    }
+}
+@media screen and (min-width: 640px) {
+    .hero_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}

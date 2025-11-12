@@ -97,7 +97,7 @@ export const GET: APIRoute = async ({ url }) => {
 
     // Build the response in the format expected by the plugin
     const response: SeoAnalysis = {
-      locale: document.querySelector('html')?.getAttribute('lang') || 'en',
+      locale: document.querySelector('html')?.getAttribute('lang') || 'is',
       slug: slug ?? 'unknown',
       permalink: websitePath,
       title: document.querySelector('title')?.textContent ?? null,

@@ -1,0 +1,21 @@
+---
+import { type FragmentOf, readFragment } from '~/lib/datocms/graphql';
+import { HeaderFragment } from './fragments.ts';
+const { data } = Astro.props;
+const unmaskedBlock = readFragment(HeaderFragment, data);
+---
+
+<header style="background-color:red;">
+  <h1>Pure drive logo</h1>
+  <nav class="">
+    <a class="navlink" href="https://www.datocms.com/docs/astro"> 📚 Full Integration Guide </a>
+  </nav>
+</header>
+
+<style>
+  header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

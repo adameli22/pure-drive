@@ -3,6 +3,8 @@ import { TagFragment } from '~/lib/datocms/commonFragments';
 import { executeQuery } from '~/lib/datocms/executeQuery';
 import { graphql } from '~/lib/datocms/graphql';
 import { DraftModeToggler } from '~/components/DraftModeToggler';
+import { Header } from '~/components/Header';
+import { HeaderFragment } from '~/components/Header/fragments';
 import { Seo, type TitleMetaLinkTag } from '@datocms/astro';
 import { isDraftModeEnabled } from '~/lib/draftMode';
 
@@ -20,9 +22,12 @@ const query = graphql(
           ...TagFragment
         }
       }
+      header {
+        ...HeaderFragment
+      }
     }
   `,
-  [TagFragment],
+  [TagFragment, HeaderFragment],
 );
 
 const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
@@ -30,27 +35,20 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="is">
   <head>
+    <title>{}</title>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/datocms/nextjs-starter-kit/src/app/global.css"
-    />
+    <link rel="stylesheet" href="/base.css" />
     <Seo data={[...result._site.faviconMetaTags, ...additionalSeo]} />
   </head>
   <body>
-    <header>
-      <h1>DatoCMS + Astro Starter Kit</h1>
-      <nav>
-        <a class="navlink" href="https://www.datocms.com/docs/astro"> 📚 Full Integration Guide </a>
-        <DraftModeToggler />
-      </nav>
-    </header>
-
+    <Header data={result.header} />
     <main>
       <slot />
     </main>
+    <footer></footer>
   </body>
 </html>

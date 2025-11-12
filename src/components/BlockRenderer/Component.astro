@@ -1,0 +1,23 @@
+---
+// import Hero from '~/components/Blocks/Hero/Hero';
+import { ImageBlock } from '~/components/blocks/ImageBlock';
+import { ImageGalleryBlock } from '~/components/blocks/ImageGalleryBlock';
+import { VideoBlock } from '~/components/blocks/VideoBlock';
+
+const { blocks } = Astro.props;
+---
+
+{
+  blocks.map((blockData: any) => {
+    switch (blockData.__typename) {
+      case 'ImageBlockRecord':
+        return <ImageBlock block={blockData} />;
+      case 'VideoBlockRecord':
+        return <VideoBlock block={blockData} />;
+      case 'ImageGalleryBlockRecord':
+        return <ImageGalleryBlock block={blockData} />;
+      default:
+        return null;
+    }
+  })
+}

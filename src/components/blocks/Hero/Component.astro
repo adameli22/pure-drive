@@ -1,0 +1,25 @@
+---
+import s from './style.module.css';
+import { ResponsiveImage } from '~/components/ResponsiveImage';
+const { title, images, introText } = Astro.props;
+---
+
+<div class={s.hero_container}>
+  <div class={s.hero_title_container}>
+    <h1>{title}</h1>
+    <p>
+      {introText}
+    </p>
+  </div>
+  <div class={s.hero_images}>
+    <div class={s.circle_image_small} style="right: 0; bottom:10%;">
+      <ResponsiveImage data={images[1].responsiveImage} />
+    </div>
+    <div class={s.circle_image_large} style="bottom: 0; left: 0;">
+      <ResponsiveImage data={images[0].responsiveImage} />
+    </div>
+    <div class={s.circle_image_small} style="top: 0; left: 25%;">
+      <ResponsiveImage data={images[2].responsiveImage} />
+    </div>
+  </div>
+</div>

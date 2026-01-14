@@ -3,7 +3,6 @@ import { graphql } from '~/lib/datocms/graphql';
 import Layout from '~/layouts/Layout.astro';
 import { TagFragment } from '~/lib/datocms/commonFragments';
 import { executeQuery } from '~/lib/datocms/executeQuery';
-import { StructuredText } from '@datocms/astro';
 
 import { VideoBlockFragment } from '~/components/blocks/VideoBlock/fragments';
 import { ImageBlockFragment } from '~/components/blocks/ImageBlock/fragments';
@@ -12,7 +11,7 @@ import { ResponsiveImageFragment } from '~/components/ResponsiveImage/fragments'
 
 import { isDraftModeEnabled } from '../lib/draftMode';
 import { BlockRenderer } from '../components/BlockRenderer';
-import { Hero } from '~/components/blocks/Hero';
+import { Hero } from '~/components/Hero';
 
 /**
  * The GraphQL query that will be executed for this route to generate the page
@@ -28,13 +27,12 @@ const query = graphql(
           ...TagFragment
         }
         title
-        heroIntroText
-        heroImages {
+        introText {
+          value
+        }
+        heroImage {
           id
-          responsiveImage(
-            imgixParams: { fm: jpg, fit: crop, w: 305, h: 305, ar: "1:1" }
-            sizes: "(max-width: 305px) 100vw"
-          ) {
+          responsiveImage(imgixParams: { fm: webp, fit: crop, h: 642, ar: "513:642", maxW: 513 }) {
             ...ResponsiveImageFragment
           }
         }
@@ -78,6 +76,6 @@ if (!page) {
 ---
 
 <Layout additionalSeo={page._seoMetaTags}>
-  <Hero title={page.title} images={page.heroImages} introText={page.heroIntroText} />
+  <Hero title={page.title} image={page.heroImage} introText={page.introText} />
   <BlockRenderer blocks={page.blocks} />
 </Layout>

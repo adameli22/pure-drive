@@ -29,8 +29,8 @@
 }
 
 body {
-    max-width: 1280px;
-    margin: 0 auto;
+    max-width: 1178px;
+    margin: 20px;
     /* 4. Add accessible line-height */
     line-height: 1.5;
     /* 5. Improve text rendering */

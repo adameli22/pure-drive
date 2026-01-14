@@ -6,7 +6,8 @@
       "~/components/*": ["./src/components/*"],
       "~/layouts/*": ["./src/layouts/*"],
       "~/lib/*": ["./src/lib/*"],
-      "~/pages/*": ["./src/pages/*"]
+      "~/pages/*": ["./src/pages/*"],
+      "~/assets/*": ["./src/assets/*"]
     },
     "plugins": [
       {

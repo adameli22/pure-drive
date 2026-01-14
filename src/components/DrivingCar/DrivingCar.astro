@@ -1,0 +1,110 @@
+---
+
+---
+
+<div class="animation_container">
+  <svg
+    class="car"
+    fill="#12293C"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -0.574 122.88 44.173"
+    id="Layer_1"
+  >
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+    <g id="SVGRepo_iconCarrier" transform="matrix(-1, 0, 0, 1, 122.870018, 0)" style="">
+      <style type="text/css">
+        .st0 {
+          fill-rule: evenodd;
+          clip-rule: evenodd;
+        }
+      </style>
+      <path
+        class="st0"
+        d="M 49.29 12.79 C 47.75 12.44 46.22 12.44 44.68 12.51 C 56.73 6.18 61.46 2.07 75.57 2.9 L 73.63 15.77 L 50.4 16.65 C 50.61 16.04 50.73 15.71 50.77 15.1 C 50.88 13.36 50.86 13.15 49.29 12.79 Z M 79.12 3.13 L 76.6 15.6 L 100.73 14.62 C 103.21 14.52 103.64 13.43 102.14 11.34 C 101.46 10.39 100.7 9.45 99.83 8.52 C 93.59 1.86 87.38 3.24 79.12 3.13 Z M 0.46 27.28 L 1.2 27.28 C 1.66 25.24 2.57 23.4 3.91 21.75 C 6.85 18.09 8.19 18.55 12.56 17.76 L 37.02 13.15 C 42.45 9.29 49 5.85 56.99 2.95 C 64.4 0.25 69.63 -0.01 77.56 0 C 82.1 0.01 86.7 0.28 91.37 0.84 C 93.74 0.99 96.06 1.31 98.34 1.77 C 101.07 2.32 103.75 3.08 106.38 3.98 L 116.18 9.64 C 119.07 11.31 119.69 13.26 120.06 16.45 L 121.44 28.23 L 122.87 28.23 L 122.87 34.74 C 122.67 36.93 121.81 37.26 119.99 37.26 L 117.62 37.26 C 118.54 16.67 89.57 13.15 90.2 38.89 L 34.76 38.89 C 38.49 21.14 20.59 14.98 11.8 25.13 C 9.13 28.22 8.2 32.44 8.44 37.43 L 2.03 37.43 C 1.52 37.19 1.12 36.86 0.82 36.45 C -0.23 35.02 0 30.71 0.08 28.22 C 0.09 27.55 -0.12 27.28 0.46 27.28 Z"
+      ></path>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0.712645)">
+      <ellipse
+        style="fill: rgba(255, 255, 255, 0); paint-order: fill; stroke: rgb(18, 41, 60); stroke-width: 4px;"
+        cx="19.028"
+        cy="32.76"
+        rx="7.918"
+        ry="7.918"></ellipse>
+      <path
+        class="rotate-tires"
+        d="M 17.809 26.663 H 20.247 V 31.541 H 25.125 V 33.979 H 20.247 V 38.857 H 17.809 V 33.979 H 12.931 V 31.541 H 17.809 Z"
+        style="paint-order: fill; stroke-width: 1;"></path>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, 0.712645)">
+      <ellipse
+        style="fill: rgba(255, 255, 255, 0); paint-order: fill; stroke: rgb(18, 41, 60); stroke-width: 4;"
+        cx="101.062"
+        cy="32.76"
+        rx="7.918"
+        ry="7.918"></ellipse>
+      <path
+        class="rotate-tires"
+        d="M 99.843 26.663 H 102.281 V 31.541 H 107.159 V 33.979 H 102.281 V 38.857 H 99.843 V 33.979 H 94.965 V 31.541 H 99.843 Z"
+        style="paint-order: fill; stroke-width: 1;"></path>
+    </g>
+  </svg>
+  <hr class="road" />
+</div>
+
+<style>
+  .animation_container {
+    opacity: 0.8;
+  }
+  .car {
+    position: relative;
+    animation: move-car 10s linear infinite;
+    width: 78px;
+  }
+  .road {
+    border-top: 4px dashed #12293c;
+  }
+
+  .rotate-tires {
+    transform-box: fill-box;
+    animation: rotate 2s linear infinite;
+    transform-origin: center;
+  }
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes move-car {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: 85%;
+    }
+  }
+  @media screen and (min-width: 640px) {
+    .animation_container {
+    }
+  }
+  @media screen and (min-width: 1023px) {
+    .animation_container {
+    }
+    .car {
+      position: relative;
+      animation: move-car 10s linear infinite;
+      width: 150px;
+    }
+    .road {
+      border-top: 7px dashed #12293c;
+    }
+  }
+</style>

@@ -42,6 +42,12 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="stylesheet" href="/base.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <Seo data={[...result._site.faviconMetaTags, ...additionalSeo]} />
   </head>
   <body>

@@ -1,11 +1,13 @@
 :root {
-    font-size: 16px;
-    font-family: "Roboto", sans-serif;
+    --color-primary: #E3A159;
+    --color-secondary: #12293C;
+    --color-background: #FDFDFD;
+    --color-text: #1E1E1E;
+    font-size: 18px;
+    font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 100;
+    font-weight: 500;
     font-style: normal;
-    font-variation-settings:
-            "wdth" 100;
 }
 
 
@@ -33,7 +35,13 @@ body {
     line-height: 1.5;
     /* 5. Improve text rendering */
     -webkit-font-smoothing: antialiased;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    @media screen and (min-width: 1177px) {
+        margin: 0 auto;
+    }
 }
+
 
 /* 6. Improve media defaults */
 img, picture, video, canvas, svg {
@@ -57,10 +65,22 @@ p {
 }
 h1, h2, h3, h4, h5, h6 {
     text-wrap: balance;
+
 }
 a {
     text-decoration: none;
     color: inherit;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 55px;
+    @media screen and (min-width: 1177px) {
+        font-size: 96px;
+        font-weight: bold;
+        line-height: 110px;
+    }
 }
 
 /*

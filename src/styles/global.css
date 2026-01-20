@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+
+@theme {
+    --color-primary: #E3A159;
+    --color-secondary: #12293C;
+    --color-background: #FDFDFD;
+    --color-text: #1E1E1E;
+    --font-primary: 'Lexend', sans-serif;
+    --font-weight-normal: 500;
+    --body-max-width: 1178px;
+}
+
+@layer base {
+    body {
+        max-width: var(--body-max-width);
+        background-color: var(--color-background);
+        margin: 20px;
+        @media screen and (min-width: 1177px) {
+            margin: 0 auto;
+        }
+    }
+}

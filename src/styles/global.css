@@ -13,10 +13,10 @@
     --animate-move-car: move-car 10s linear infinite;
     @keyframes move-car {
         0% {
-            left: 0;
+            left: -40%;
         }
         100% {
-            left: 85%;
+            left: 120%;
         }
     }
 

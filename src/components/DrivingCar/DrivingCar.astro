@@ -4,7 +4,7 @@
 
 <div class="animation_container">
   <svg
-    class="car"
+    class="relative w-[78px] lg:w-[150px] animate-(--animate-move-car)"
     fill="#12293C"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 -0.574 122.88 44.173"
@@ -49,22 +49,10 @@
         style="paint-order: fill; stroke-width: 1;"></path>
     </g>
   </svg>
-  <hr class="road" />
+  <hr class="border-t-[4px] lg:border-t-[7px] border-dashed border-(--color-secondary)" />
 </div>
 
-<style>
-  .animation_container {
-    opacity: 0.8;
-  }
-  .car {
-    position: relative;
-    animation: move-car 10s linear infinite;
-    width: 78px;
-  }
-  .road {
-    border-top: 4px dashed #12293c;
-  }
-
+<style scoped>
   .rotate-tires {
     transform-box: fill-box;
     animation: rotate 2s linear infinite;
@@ -81,30 +69,6 @@
 
     100% {
       transform: rotate(360deg);
-    }
-  }
-  @keyframes move-car {
-    0% {
-      left: 0;
-    }
-    100% {
-      left: 85%;
-    }
-  }
-  @media screen and (min-width: 640px) {
-    .animation_container {
-    }
-  }
-  @media screen and (min-width: 1023px) {
-    .animation_container {
-    }
-    .car {
-      position: relative;
-      animation: move-car 10s linear infinite;
-      width: 150px;
-    }
-    .road {
-      border-top: 7px dashed #12293c;
     }
   }
 </style>

@@ -10,6 +10,16 @@
     --body-max-width: 1178px;
     --hero-image-box-shadow: 20px 15px 0 0 #12293c;
     --hero-image-box-shadow-lg: 30px 25px 0 0 #12293c;
+    --animate-move-car: move-car 10s linear infinite;
+    @keyframes move-car {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: 85%;
+        }
+    }
+
 }
 
 @layer base {

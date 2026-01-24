@@ -11,6 +11,9 @@
     --hero-image-box-shadow: 20px 15px 0 0 #12293c;
     --hero-image-box-shadow-lg: 30px 25px 0 0 #12293c;
     --animate-move-car: move-car 10s linear infinite;
+    --ring-size: 370px;
+    --ring-size-large: 570px;
+
     @keyframes move-car {
         0% {
             left: -40%;

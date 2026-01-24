@@ -1,70 +1,21 @@
 ---
 import { Image } from 'astro:assets';
-import MenuIcon from '../../assets/material-symbols--menu-rounded.svg';
-import CloseMenuIcon from '../../assets/material-symbols--close-rounded.svg';
-import { type FragmentOf, readFragment } from '~/lib/datocms/graphql';
+import { readFragment } from '~/lib/datocms/graphql';
 import { HeaderFragment } from './fragments.ts';
-import { ResponsiveImage } from '~/components/ResponsiveImage';
 
 const { data } = Astro.props;
 const unmaskedBlock = readFragment(HeaderFragment, data);
 ---
 
 <header>
-  <div class="header_container">
-    <Image src={data.logo.url} alt="Pure Drive Logo" height="60" width="173" class="logo" />
+  <div class="place-content-center pb-2.5 sm:pb-0 sm:h-[120px]">
+    <Image
+      src={unmaskedBlock.logo.url}
+      alt="Pure Drive Logo"
+      height="40"
+      width="120"
+      class="w-[120px] sm:w-[173px]"
+      loading="eager"
+    />
   </div>
 </header>
-
-<!--<header>
-  <div class={s.header_container}>
-    <Image src={Logo} alt="Pure Drive Logo" height="50" width="50" />
-    <MenuIcon width="35px" height="35px" />
-  </div>
-  <nav>
-    <div class={s.mobile_nav}>
-      <CloseMenuIcon width="35px" height="35px" />
-      <ul>
-        {
-          unmaskedBlock.headerLinks.map((link: any) => (
-            <li>
-              <a href={link.linkField.formatted.url}>{link.linkField.custom_text}</a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </nav>
-</header>-->
-
-<style>
-  .header_container {
-    place-content: center;
-    padding-bottom: 10px;
-    .logo {
-      width: 120px;
-    }
-    ul {
-      list-style: none;
-    }
-
-    .mobile_nav {
-      position: absolute;
-      height: 100dvh;
-      width: 100%;
-    }
-    nav {
-      /*display: none;*/
-    }
-  }
-
-  @media screen and (min-width: 640px) {
-    .header_container {
-      padding-bottom: 0;
-      height: 120px;
-      .logo {
-        width: 173px;
-      }
-    }
-  }
-</style>

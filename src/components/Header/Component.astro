@@ -1,21 +1,70 @@
 ---
+import { Image } from 'astro:assets';
+import MenuIcon from '../../assets/material-symbols--menu-rounded.svg';
+import CloseMenuIcon from '../../assets/material-symbols--close-rounded.svg';
 import { type FragmentOf, readFragment } from '~/lib/datocms/graphql';
 import { HeaderFragment } from './fragments.ts';
+import { ResponsiveImage } from '~/components/ResponsiveImage';
+
 const { data } = Astro.props;
 const unmaskedBlock = readFragment(HeaderFragment, data);
 ---
 
-<header style="background-color:red;">
-  <h1>Pure drive logo</h1>
-  <nav class="">
-    <a class="navlink" href="https://www.datocms.com/docs/astro"> 📚 Full Integration Guide </a>
-  </nav>
+<header>
+  <div class="header_container">
+    <Image src={data.logo.url} alt="Pure Drive Logo" height="60" width="173" class="logo" />
+  </div>
 </header>
 
+<!--<header>
+  <div class={s.header_container}>
+    <Image src={Logo} alt="Pure Drive Logo" height="50" width="50" />
+    <MenuIcon width="35px" height="35px" />
+  </div>
+  <nav>
+    <div class={s.mobile_nav}>
+      <CloseMenuIcon width="35px" height="35px" />
+      <ul>
+        {
+          unmaskedBlock.headerLinks.map((link: any) => (
+            <li>
+              <a href={link.linkField.formatted.url}>{link.linkField.custom_text}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</header>-->
+
 <style>
-  header {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  .header_container {
+    place-content: center;
+    padding-bottom: 10px;
+    .logo {
+      width: 120px;
+    }
+    ul {
+      list-style: none;
+    }
+
+    .mobile_nav {
+      position: absolute;
+      height: 100dvh;
+      width: 100%;
+    }
+    nav {
+      /*display: none;*/
+    }
+  }
+
+  @media screen and (min-width: 640px) {
+    .header_container {
+      padding-bottom: 0;
+      height: 120px;
+      .logo {
+        width: 173px;
+      }
+    }
   }
 </style>

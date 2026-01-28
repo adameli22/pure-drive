@@ -36,10 +36,8 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
 ---
 
 <!doctype html>
-<html lang="is">
 <html lang="is" class="text-(color:--color-text) font-primary font-medium">
   <head>
-    <title>{}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
@@ -56,6 +54,5 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
     <main>
       <slot />
     </main>
-    <footer></footer>
   </body>
 </html>

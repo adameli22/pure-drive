@@ -17,11 +17,11 @@ interface Props {
 
 const { image, eyebrow, title, accent, intro, buttonBool, button } = Astro.props;
 
-// TODO Create link component that manages the link data output
+// TODO: Create link component that manages the link data output
 
 const link = button?.link?.formatted;
 const ctaHref = link?.url;
-// When no custom label has been set, DatoCMS returns the URL as the text.
+
 const ctaLabel = link?.text;
 const showCta = buttonBool !== false;
 

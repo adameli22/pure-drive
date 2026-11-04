@@ -1,6 +1,4 @@
 ---
-import { ImageBlock } from '~/components/blocks/ImageBlock';
-import { VideoBlock } from '~/components/blocks/VideoBlock';
 import { Hero } from '~/components/sections/Hero';
 import { ContentWithImage } from '~/components/sections/ContentWithImage';
 import { StepByStep } from '~/components/sections/StepByStep';
@@ -20,6 +18,7 @@ const { blocks } = Astro.props;
             image={blockData.image}
             eyebrow={blockData.pill}
             title={blockData.title}
+            accent={blockData.accent}
             intro={blockData.shortIntroduction}
             buttonBool={blockData.addButton}
             button={blockData.button}
@@ -73,10 +72,6 @@ const { blocks } = Astro.props;
             image={blockData.image}
           />
         );
-      case 'ImageBlockRecord':
-        return <ImageBlock block={blockData} />;
-      case 'VideoBlockRecord':
-        return <VideoBlock block={blockData} />;
       default:
         return null;
     }

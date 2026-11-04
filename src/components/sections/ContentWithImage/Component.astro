@@ -1,0 +1,67 @@
+---
+import { StructuredText } from '@datocms/astro';
+import { ResponsiveImage } from '~/components/ResponsiveImage';
+import { SectionBadge } from '~/components/SectionBadge';
+
+//TODO:
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  text?: { value: any } | null;
+  image?: { id: string; responsiveImage: any } | null;
+  imagePosition?: boolean;
+  imageAlt?: string;
+}
+
+const { eyebrow, title, text, image, imagePosition = false, imageAlt } = Astro.props;
+
+const photo = image?.responsiveImage;
+const photoData = photo ? { ...photo, alt: photo.alt ?? imageAlt } : null;
+
+const fillImage = {
+  width: '100%',
+  height: '100%',
+  maxWidth: 'none',
+  aspectRatio: 'auto',
+  objectFit: 'cover',
+};
+---
+
+<section class="bg-surface-warm py-14 sm:py-16 lg:py-24 xl:py-section">
+  <div
+    class:list={[
+      'flex flex-col items-center gap-10 lg:flex-row lg:gap-24',
+      imagePosition && 'lg:flex-row-reverse',
+    ]}
+  >
+    <div class="flex shrink-0 items-center justify-center">
+      {
+        photoData && (
+          <div class="size-[280px] overflow-hidden rounded-card sm:size-[380px] lg:size-[450px]">
+            <ResponsiveImage
+              data={photoData}
+              sizes="(max-width: 640px) 280px, (max-width: 1024px) 380px, 450px"
+              pictureClass="block size-full"
+              imgStyle={fillImage}
+              imgClass="size-full object-cover"
+            />
+          </div>
+        )
+      }
+    </div>
+
+    <div class="flex flex-1 flex-col items-start gap-6">
+      {eyebrow && <SectionBadge label={eyebrow} />}
+      <h2 class="text-secondary">{title}</h2>
+
+      {
+        text?.value && (
+          <div class="flex flex-col gap-6 [&>p:first-child]:text-title [&>p:first-child]:font-semibold [&>p:first-child]:leading-8 [&>p:first-child]:text-primary [&>p:not(:first-child)]:text-muted">
+            <StructuredText data={text.value} />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

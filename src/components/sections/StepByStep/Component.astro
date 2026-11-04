@@ -1,0 +1,43 @@
+---
+import { SectionBadge } from '~/components/SectionBadge';
+
+interface Step {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  intro?: string;
+  steps?: Step[];
+}
+
+const { eyebrow, title, intro, steps = [] } = Astro.props;
+---
+
+<section class="bg-background py-14 sm:py-16 lg:py-24 xl:py-section">
+  <div class="flex flex-col gap-10 xl:gap-block">
+    <div class="flex flex-col items-center gap-4 text-center">
+      {eyebrow && <SectionBadge label={eyebrow} />}
+      <h2 class="text-secondary">{title}</h2>
+      {intro && <p class="max-w-[700px] text-muted">{intro}</p>}
+    </div>
+
+    <ol class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      {
+        steps.map((step, index) => (
+          <li class="flex flex-col gap-4 rounded-card border-2 border-secondary bg-surface p-8 shadow-card">
+            <div class="flex items-center gap-4">
+              <span class="flex size-12 shrink-0 items-center justify-center rounded-control bg-primary text-subtitle text-secondary">
+                {index + 1}
+              </span>
+              <span class="flex-1 text-subtitle text-secondary">{step.title}</span>
+            </div>
+            <p class="text-caption text-muted">{step.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

@@ -3,22 +3,18 @@ import { graphql } from '~/lib/datocms/graphql';
 import Layout from '~/layouts/Layout.astro';
 import { TagFragment } from '~/lib/datocms/commonFragments';
 import { executeQuery } from '~/lib/datocms/executeQuery';
+import { SectionRenderer } from '~/components/SectionRenderer';
 
-import { VideoBlockFragment } from '~/components/blocks/VideoBlock/fragments';
-import { ImageBlockFragment } from '~/components/blocks/ImageBlock/fragments';
-import { ImageGalleryBlockFragment } from '~/components/blocks/ImageGalleryBlock/fragments';
 import { ResponsiveImageFragment } from '~/components/ResponsiveImage/fragments';
+import { HeroSectionFragment } from '~/components/sections/Hero/fragments';
+import { ContactSectionFragment } from '~/components/sections/Contact/fragments';
+import { ContentWithImageSectionFragment } from '~/components/sections/ContentWithImage/fragments';
+import { FaqSectionFragment } from '~/components/sections/Faq/fragments';
+import { PricingSectionFragment } from '~/components/sections/Pricing/fragments';
+import { StepByStepSectionFragment } from '~/components/sections/StepByStep/fragments';
 
 import { isDraftModeEnabled } from '../lib/draftMode';
-import { BlockRenderer } from '../components/BlockRenderer';
-import { Hero } from '~/components/Hero';
 
-/**
- * The GraphQL query that will be executed for this route to generate the page
- * content and metadata.
- *
- * Thanks to gql.tada, the result will be fully typed!
- */
 const query = graphql(
   /* GraphQL */ `
     query BasicPageQuery {
@@ -26,30 +22,30 @@ const query = graphql(
         _seoMetaTags {
           ...TagFragment
         }
-        title
-        introText {
-          value
-        }
-        heroImage {
-          id
-          responsiveImage(imgixParams: { fm: webp, fit: crop, h: 642, ar: "513:642", maxW: 513 }) {
-            ...ResponsiveImageFragment
-          }
-        }
+
         blocks {
           __typename
           ... on RecordInterface {
             id
             __typename
-          }
-          ... on ImageBlockRecord {
-            ...ImageBlockFragment
-          }
-          ... on ImageGalleryBlockRecord {
-            ...ImageGalleryBlockFragment
-          }
-          ... on VideoBlockRecord {
-            ...VideoBlockFragment
+            ... on HeroSectionRecord {
+              ...HeroSectionFragment
+            }
+            ... on ContentWithImageSectionRecord {
+              ...ContentWithImageSectionFragment
+            }
+            ... on StepByStepSectionRecord {
+              ...StepByStepSectionFragment
+            }
+            ... on PricingSectionRecord {
+              ...PricingSectionFragment
+            }
+            ... on FaqSectionRecord {
+              ...FaqSectionFragment
+            }
+            ... on ContactSectionRecord {
+              ...ContactSectionFragment
+            }
           }
         }
       }
@@ -57,13 +53,15 @@ const query = graphql(
   `,
   [
     TagFragment,
-    ImageBlockFragment,
-    ImageGalleryBlockFragment,
-    VideoBlockFragment,
+    HeroSectionFragment,
+    ContentWithImageSectionFragment,
+    StepByStepSectionFragment,
+    PricingSectionFragment,
+    FaqSectionFragment,
+    ContactSectionFragment,
     ResponsiveImageFragment,
   ],
 );
-
 const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
 const { page } = await executeQuery(query, { includeDrafts: draftModeEnabled });
 
@@ -76,6 +74,5 @@ if (!page) {
 ---
 
 <Layout additionalSeo={page._seoMetaTags}>
-  <Hero title={page.title} image={page.heroImage} introText={page.introText} />
-  <BlockRenderer blocks={page.blocks} />
+  <SectionRenderer blocks={page.blocks} />
 </Layout>

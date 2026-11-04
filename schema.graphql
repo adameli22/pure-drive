@@ -445,6 +445,7 @@ type HeroSectionRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  accent: String!
   addButton: BooleanType!
   button: ButtonRecord
   id: ItemId!

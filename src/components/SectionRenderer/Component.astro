@@ -1,0 +1,84 @@
+---
+import { ImageBlock } from '~/components/blocks/ImageBlock';
+import { VideoBlock } from '~/components/blocks/VideoBlock';
+import { Hero } from '~/components/sections/Hero';
+import { ContentWithImage } from '~/components/sections/ContentWithImage';
+import { StepByStep } from '~/components/sections/StepByStep';
+import { Pricing } from '~/components/sections/Pricing';
+import { Faq } from '~/components/sections/Faq';
+import { Contact } from '~/components/sections/Contact';
+
+const { blocks } = Astro.props;
+---
+
+{
+  blocks.map((blockData: any) => {
+    switch (blockData.__typename) {
+      case 'HeroSectionRecord':
+        return (
+          <Hero
+            image={blockData.image}
+            eyebrow={blockData.pill}
+            title={blockData.title}
+            intro={blockData.shortIntroduction}
+            buttonBool={blockData.addButton}
+            button={blockData.button}
+          />
+        );
+      case 'ContentWithImageSectionRecord':
+        return (
+          <ContentWithImage
+            eyebrow={blockData.pill}
+            title={blockData.title}
+            text={blockData.text}
+            image={blockData.image}
+            imagePosition={blockData.imagePosition}
+          />
+        );
+      case 'StepByStepSectionRecord':
+        return (
+          <StepByStep
+            eyebrow={blockData.pill}
+            title={blockData.title}
+            intro={blockData.description}
+            steps={blockData.steps}
+          />
+        );
+      case 'PricingSectionRecord':
+        return (
+          <Pricing
+            eyebrow={blockData.pill}
+            title={blockData.title}
+            intro={blockData.description}
+            plans={blockData.prices}
+          />
+        );
+      case 'FaqSectionRecord':
+        return (
+          <Faq
+            eyebrow={blockData.pill}
+            title={blockData.title}
+            intro={blockData.description}
+            items={blockData.items}
+          />
+        );
+      case 'ContactSectionRecord':
+        return (
+          <Contact
+            eyebrow={blockData.pill}
+            title={blockData.title}
+            description={blockData.description}
+            phoneNumber={blockData.phoneNumber}
+            email={blockData.email}
+            image={blockData.image}
+          />
+        );
+      case 'ImageBlockRecord':
+        return <ImageBlock block={blockData} />;
+      case 'VideoBlockRecord':
+        return <VideoBlock block={blockData} />;
+      default:
+        return null;
+    }
+  })
+}

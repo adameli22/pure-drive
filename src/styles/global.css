@@ -1,15 +1,86 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary: #E3A159;
-    --color-secondary: #12293C;
+    /* ── Colors ──────────────────────────────────────────────── */
+    --color-primary: #E3A159; /* Figma: Yellow */
+    --color-secondary: #12293C; /* Figma: Dark blue */
     --color-background: #FDFDFD;
-    --color-text: #1E1E1E;
-    --font-primary: 'Lexend', sans-serif;
-    --font-weight-normal: 500;
-    --body-max-width: 1178px;
-    --hero-image-box-shadow: 20px 15px 0 0 #12293c;
-    --hero-image-box-shadow-lg: 30px 25px 0 0 #12293c;
+    --color-surface: #FFFFFF; /* card fills */
+    --color-surface-warm: #FDF9F3; /* About + Pricing sections */
+    --color-text: #1E1E1E; /* Figma: Text color */
+    --color-muted: #616161; /* all body copy */
+    --color-inverse-muted: #F5F5F7; /* body text on Dark blue */
+    --color-line: #F5F5F7; /* footer rule */
+    --color-primary-soft: rgba(227, 161, 89, 0.2); /* "Vinsælast" chip */
+    --color-border-strong: #12293C; /* 2px card borders */
+
+    /* ── Radii ───────────────────────────────────────────────── */
+    --radius-card: 20px; /* Figma: large image BR */
+    --radius-panel: 15px; /* accordion items */
+    --radius-control: 12px; /* button + step number */
+    --radius-chip: 6px; /* small chip */
+    --radius-pill: 9999px; /* section badges */
+
+    /* ── Shadows (hard offset, zero blur) ────────────────────── */
+    --shadow-hard-sm: 4px 4px 0 0 var(--color-secondary); /* Figma: FAQ shadow — button + accordion */
+    --shadow-card: 8px 8px 0 0 var(--color-secondary); /* pricing + step cards */
+    --shadow-card-featured: 8px 8px 0 0 var(--color-primary); /* highlighted pricing card */
+    --shadow-photo: 20px 15px 0 0 var(--color-secondary); /* hero photo, small */
+    --shadow-photo-lg: 30px 25px 0 0 var(--color-secondary); /* Figma: Large Image drop-shadow */
+    --shadow-photo-accent: 20px 15px 0 0 var(--color-primary); /* contact photo — intentionally Yellow */
+
+    /* ── Typography ──────────────────────────────────────────── */
+    --font-primary: "Lexend", sans-serif;
+    --font-weight-normal: 400;
+
+    --text-display: 72px;
+    --text-display--line-height: 84px;
+    --text-display--letter-spacing: -1.5px;
+    --text-display--font-weight: 800;
+
+    --text-heading: 48px;
+    --text-heading--line-height: 58px;
+    --text-heading--font-weight: 800;
+
+    --text-price: 32px;
+    --text-price--font-weight: 700;
+
+    --text-title: 24px;
+    --text-title--font-weight: 700;
+
+    --text-subtitle: 20px;
+    --text-subtitle--font-weight: 600;
+
+    --text-lead: 20px;
+    --text-lead--line-height: 32px;
+
+    --text-body: 18px;
+    --text-body--line-height: 30px;
+
+    --text-body-sm: 16px;
+    --text-body-sm--line-height: 26px;
+
+    --text-caption: 15px;
+    --text-caption--line-height: 22px;
+
+    --text-eyebrow: 14px;
+    --text-eyebrow--letter-spacing: 1.5px;
+    --text-eyebrow--font-weight: 600;
+
+    --text-badge: 12px;
+    --text-badge--letter-spacing: 1px;
+    --text-badge--font-weight: 600;
+
+    /* ── Layout & spacing rhythm ─────────────────────────────── */
+    --body-max-width: 1200px;
+    --spacing-section: 120px;
+    --spacing-block: 64px;
+    --spacing-column: 80px;
+    --spacing-stack: 32px;
+    --spacing-grid: 24px;
+    --spacing-card: 40px;
+
+    /* ── Motion & decor ──────────────────────────────────────── */
     --animate-move-car: move-car 10s linear infinite;
     --ring-size: 370px;
     --ring-size-large: 570px;
@@ -22,7 +93,6 @@
             left: 120%;
         }
     }
-
 }
 
 @layer base {
@@ -30,7 +100,7 @@
         max-width: var(--body-max-width);
         background-color: var(--color-background);
         margin: 20px;
-        @media screen and (min-width: 1178px) {
+        @media screen and (min-width: 1200px) {
             margin: 0 auto;
         }
     }
@@ -42,44 +112,52 @@
     }
 
     h1 {
-        font-size: 42px;
-        font-weight: bold;
-        line-height: 55px;
+        font-size: 40px;
+        font-weight: var(--text-display--font-weight);
+        line-height: 46px;
+        letter-spacing: -1px;
     }
     h2 {
-        font-size: 30px;
+        font-size: 32px;
+        font-weight: var(--text-heading--font-weight);
+        line-height: 40px;
+    }
+    p {
+        font-size: var(--text-body-sm);
+        line-height: var(--text-body-sm--line-height);
     }
 
     @media screen and (min-width: 640px) {
         h1 {
-            font-size: 62px;
-            line-height: 75px;
+            font-size: 52px;
+            line-height: 60px;
+            letter-spacing: -1.2px;
         }
         h2 {
-            font-size: 36px;
+            font-size: 40px;
+            line-height: 48px;
         }
     }
     @media screen and (min-width: 1024px) {
         h1 {
-            font-size: 80px;
-            line-height: 90px;
+            font-size: 64px;
+            line-height: 74px;
+            letter-spacing: -1.4px;
         }
         h2 {
-            font-size: 36px;
+            font-size: var(--text-heading);
+            line-height: var(--text-heading--line-height);
         }
         p {
-            font-size: 20px;
+            font-size: var(--text-body);
+            line-height: var(--text-body--line-height);
         }
     }
-
-    @media screen and (min-width: 1178px) {
+    @media screen and (min-width: 1280px) {
         h1 {
-            font-size: 96px;
-            line-height: 110px;
-        }
-        p {
-            font-size: 24px;
+            font-size: var(--text-display);
+            line-height: var(--text-display--line-height);
+            letter-spacing: var(--text-display--letter-spacing);
         }
     }
-
 }

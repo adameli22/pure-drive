@@ -42,10 +42,6 @@ const { eyebrow, title, intro, items = [] } = Astro.props;
               </svg>
             </summary>
             <div class="px-6 pb-4 lg:px-8">
-              {/*
-                The `answer` field is a formatted text field: DatoCMS returns HTML,
-                so it is injected as markup rather than escaped text.
-              */}
               <div class="text-body-sm text-muted" set:html={item.answer} />
             </div>
           </details>

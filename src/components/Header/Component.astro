@@ -2,20 +2,49 @@
 import { Image } from 'astro:assets';
 import { readFragment } from '~/lib/datocms/graphql';
 import { HeaderFragment } from './fragments.ts';
+import menuSvg from '~/assets/menu.svg';
+import NavItem from './NavItem.astro';
 
 const { data } = Astro.props;
 const unmaskedBlock = readFragment(HeaderFragment, data);
+const links = unmaskedBlock.headerLinks;
 ---
 
 <header>
-  <div class="place-content-center pb-2.5 sm:pb-0 sm:h-[120px]">
-    <Image
-      src={unmaskedBlock.logo.url}
-      alt="Pure Drive Logo"
-      height="40"
-      width="120"
-      class="w-[120px] sm:w-[173px]"
-      loading="eager"
-    />
-  </div>
+  <nav class="relative">
+    <div class="inline-flex w-full justify-between lg:h-[120px]">
+      <Image
+        src={unmaskedBlock.logo.url}
+        alt="Pure Drive Logo"
+        height="40"
+        width="120"
+        class="w-[120px] sm:w-[173px]"
+        loading="eager"
+      />
+      <!-- <ul class="hidden">
+        {
+          links.map((item: any) => (
+          <NavItem link={item.linkField.formatted.url} label={item.linkField.formatted.text} />
+          ))
+          }
+          </ul> -->
+
+      <!-- mobile -->
+      <button id="menu-toggle" aria-label="Toggle navigation">
+        <Image src={menuSvg} height="35" width="35" alt="" />
+      </button>
+    </div>
+    <div
+      id="mobile-menu"
+      class="absolute flex items-center justify-center z-10 bg-amber-700 w-full text-center"
+    >
+      <ul class="flex flex-col w-full justify-center gap-5 p-5">
+        {
+          links.map((item: any) => (
+            <NavItem link={item.linkField.formatted.url} label={item.linkField.formatted.text} />
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
 </header>

@@ -7,7 +7,7 @@ import { SectionBadge } from '~/components/SectionBadge';
 
 interface Props {
   eyebrow?: string;
-  title?: string;
+  title: string;
   text?: { value: any } | null;
   image?: { id: string; responsiveImage: any } | null;
   imagePosition?: boolean;
@@ -28,7 +28,10 @@ const fillImage = {
 };
 ---
 
-<section class="bg-surface-warm py-14 sm:py-16 lg:py-24 xl:py-section">
+<section
+  id={title.replace(/ /g, '-').toLowerCase()}
+  class="bg-surface-warm py-14 sm:py-16 lg:py-24 xl:py-section"
+>
   <div
     class:list={[
       'flex flex-col items-center gap-10 lg:flex-row lg:gap-24',

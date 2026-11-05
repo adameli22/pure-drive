@@ -11,8 +11,8 @@ const links = unmaskedBlock.headerLinks;
 ---
 
 <header>
-  <nav class="relative">
-    <div class="inline-flex w-full justify-between lg:h-[120px]">
+  <nav class="">
+    <div class="">
       <Image
         src={unmaskedBlock.logo.url}
         alt="Pure Drive Logo"
@@ -34,11 +34,8 @@ const links = unmaskedBlock.headerLinks;
         <Image src={menuSvg} height="35" width="35" alt="" />
       </button>
     </div>
-    <div
-      id="mobile-menu"
-      class="absolute flex items-center justify-center z-10 bg-amber-700 w-full text-center"
-    >
-      <ul class="flex flex-col w-full justify-center gap-5 p-5">
+    <div id="mobile-menu" class="">
+      <ul class="">
         {
           links.map((item: any) => (
             <NavItem link={item.linkField.formatted.url} label={item.linkField.formatted.text} />

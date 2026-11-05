@@ -5,7 +5,7 @@ import { SectionBadge } from '~/components/SectionBadge';
 // TODO: fix image
 // TODO: fix background color
 interface Props {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
   description?: string;
   phoneNumber?: any;
@@ -38,7 +38,7 @@ const fillImage = {
 
 <div class="bg-secondary background-max-width">
   <section
-    id={title.replace(/ /g, '-').toLowerCase()}
+    id={eyebrow.replace(/ /g, '-').toLowerCase()}
     class="bg-secondary py-14 sm:py-16 lg:py-24 xl:py-section"
   >
     <div class="flex flex-col items-center gap-10 lg:flex-row xl:gap-column">

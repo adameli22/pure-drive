@@ -7,7 +7,7 @@ interface Step {
 }
 
 interface Props {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
   intro?: string;
   steps?: Step[];
@@ -17,7 +17,7 @@ const { eyebrow, title, intro, steps = [] } = Astro.props;
 ---
 
 <section
-  id={title.replace(/ /g, '-').toLowerCase()}
+  id={eyebrow.replace(/ /g, '-').toLowerCase()}
   class="bg-background py-14 sm:py-16 lg:py-24 xl:py-section"
 >
   <div class="flex flex-col gap-10 xl:gap-block">

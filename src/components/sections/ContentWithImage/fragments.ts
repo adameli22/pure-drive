@@ -7,6 +7,7 @@ export const ContentWithImageSectionFragment = graphql(
     fragment ContentWithImageSectionFragment on ContentWithImageSectionRecord {
       pill
       title
+      highlightedTopText
       text {
         value
       }

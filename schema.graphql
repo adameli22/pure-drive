@@ -81,7 +81,7 @@ type ContactSectionRecord implements RecordInterface {
   id: ItemId!
   image: FileField!
   phoneNumber: JsonField!
-  pill: String
+  pill: String!
   title: String!
 }
 
@@ -112,10 +112,11 @@ type ContentWithImageSectionRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  highlightedTopText: String
   id: ItemId!
   image: FileField!
   imagePosition: BooleanType!
-  pill: String
+  pill: String!
   text: ContentWithImageSectionModelTextField!
   title: String!
 }
@@ -179,7 +180,7 @@ type FaqSectionRecord implements RecordInterface {
   ): String
   id: ItemId!
   items: [FaqItemRecord!]!
-  pill: String
+  pill: String!
   title: String!
 }
 
@@ -2780,7 +2781,7 @@ type PricingSectionRecord implements RecordInterface {
     markdown: Boolean
   ): String
   id: ItemId!
-  pill: String
+  pill: String!
   prices: [PricingItemRecord!]!
   title: String!
 }
@@ -2986,7 +2987,7 @@ type StepByStepSectionRecord implements RecordInterface {
     markdown: Boolean
   ): String
   id: ItemId!
-  pill: String
+  pill: String!
   steps: [StepItemRecord!]!
   title: String!
 }

@@ -2,46 +2,116 @@
 import { Image } from 'astro:assets';
 import { readFragment } from '~/lib/datocms/graphql';
 import { HeaderFragment } from './fragments.ts';
-import menuSvg from '~/assets/menu.svg';
 import NavItem from './NavItem.astro';
 
+import BurgerIcon from './BurgerIcon.astro';
+import CloseIcon from './CloseIcon.astro';
 const { data } = Astro.props;
 const unmaskedBlock = readFragment(HeaderFragment, data);
 const links = unmaskedBlock.headerLinks;
+
+//TODO make aria-labels and icon alt text dynamic with chosen language
 ---
 
-<header>
-  <nav class="">
-    <div class="">
+<header class="sticky z-50 top-0 bg-surface">
+  <div class="flex h-[60px] items-center justify-between lg:h-[120px]">
+    <a href="/" class="shrink-0" aria-label="Pure Drive — forsíða">
       <Image
         src={unmaskedBlock.logo.url}
         alt="Pure Drive Logo"
-        height="40"
-        width="120"
-        class="w-[120px] sm:w-[173px]"
+        width={346}
+        height={120}
+        class="h-[51px] w-[145px] object-contain lg:h-[60px] lg:w-[173px]"
         loading="eager"
       />
-      <!-- <ul class="hidden">
-        {
-          links.map((item: any) => (
-          <NavItem link={item.linkField.formatted.url} label={item.linkField.formatted.text} />
-          ))
-          }
-          </ul> -->
+    </a>
 
-      <!-- mobile -->
-      <button id="menu-toggle" aria-label="Toggle navigation">
-        <Image src={menuSvg} height="35" width="35" alt="" />
-      </button>
-    </div>
-    <div id="mobile-menu" class="">
-      <ul class="">
+    <nav class="hidden lg:block" aria-label="Aðalvalmynd">
+      <ul class="flex items-center justify-evenly gap-[59px]">
         {
           links.map((item: any) => (
             <NavItem link={item.linkField.formatted.url} label={item.linkField.formatted.text} />
           ))
         }
       </ul>
+    </nav>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="flex size-11 items-center justify-center rounded-control text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary lg:hidden"
+      aria-label="Opna valmynd"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <BurgerIcon id="menu-icon-open" class="" aria-hidden="true" alt="Open Menu" />
+      <CloseIcon id="menu-icon-close" class="hidden" aria-hidden="true" alt="close Menu" />
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="invisible absolute inset-x-0 top-full overflow-hidden h-0 transition-[height,visibility] duration-300 ease-out lg:hidden"
+  >
+    <div class="min-h-0">
+      <nav aria-label="Valmynd" class="rounded-panel bg-surface place-items-center">
+        <ul class="flex flex-col h-svh w-fit text-center">
+          {
+            links.map((item: any) => (
+              <NavItem
+                link={item.linkField.formatted.url}
+                label={item.linkField.formatted.text}
+                variant="mobile"
+              />
+            ))
+          }
+        </ul>
+      </nav>
     </div>
-  </nav>
+  </div>
 </header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const openIcon = document.getElementById('menu-icon-open');
+  const closeIcon = document.getElementById('menu-icon-close');
+
+  const setMenu = (open: boolean) => {
+    if (!menu || !toggle) return;
+
+    menu.classList.toggle('h-screen', open);
+    menu.classList.toggle('h-0', !open);
+    menu.classList.toggle('visible', open);
+    menu.classList.toggle('invisible', !open);
+
+    openIcon?.classList.toggle('hidden', open);
+    closeIcon?.classList.toggle('hidden', !open);
+
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Loka valmynd' : 'Opna valmynd');
+  };
+
+  toggle?.addEventListener('click', () => {
+    setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') setMenu(false);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Node)) return;
+    if (toggle?.contains(event.target) || menu?.contains(event.target)) return;
+    setMenu(false);
+  });
+
+  const desktop = window.matchMedia('(min-width: 1024px)');
+  desktop.addEventListener('change', (event) => {
+    if (event.matches) setMenu(false);
+  });
+</script>

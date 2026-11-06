@@ -2,13 +2,22 @@
 interface Props {
   link: string;
   label: string;
+  variant?: 'desktop' | 'mobile';
 }
 
-const { link, label } = Astro.props;
+const { link, label, variant = 'desktop' } = Astro.props;
 ---
 
-<li class="flex items-center">
-  <a class="font-medium text-title leading-[24px] tracking-[-0.25px] text-secondary hover:underline focus-visible:underline" href={link}>
+<li class:list={[variant === 'mobile' && 'w-full', variant === 'desktop' && 'flex items-center']}>
+  <a
+    class:list={[
+      'font-medium text-secondary',
+      variant === 'desktop'
+        ? 'text-subtitle xl:text-title leading-[24px] tracking-[-0.25px]'
+        : 'block w-full rounded-control px-4 py-5 text-price leading-[28px] hover:bg-surface-warm',
+    ]}
+    href={link}
+  >
     {label}
   </a>
 </li>

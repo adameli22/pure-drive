@@ -5,7 +5,9 @@ import { executeQuery } from '~/lib/datocms/executeQuery';
 import { graphql } from '~/lib/datocms/graphql';
 import { DraftModeToggler } from '~/components/DraftModeToggler';
 import { Header } from '~/components/Header';
+import { Footer } from '~/components/Footer';
 import { HeaderFragment } from '~/components/Header/fragments';
+import { FooterFragment } from '~/components/Footer/fragments';
 import { Seo, type TitleMetaLinkTag } from '@datocms/astro';
 import { isDraftModeEnabled } from '~/lib/draftMode';
 
@@ -26,9 +28,12 @@ const query = graphql(
       header {
         ...HeaderFragment
       }
+      footer {
+        ...FooterFragment
+      }
     }
   `,
-  [TagFragment, HeaderFragment],
+  [TagFragment, HeaderFragment, FooterFragment],
 );
 
 const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
@@ -36,7 +41,7 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
 ---
 
 <!doctype html>
-<html lang="is" class="text-(color:--color-text) font-primary font-medium">
+<html lang="is" class="text-(color:--color-text) font-primary font-normal">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -54,5 +59,6 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
     <main>
       <slot />
     </main>
+    <Footer data={result.footer} />
   </body>
 </html>

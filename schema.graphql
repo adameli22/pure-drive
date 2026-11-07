@@ -1,6 +1,30 @@
 """Represents `true` or `false` values."""
 scalar BooleanType
 
+"""Block of type Button (button)"""
+type ButtonRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  link: JsonField
+}
+
 type CollectionMetadata {
   count: IntType!
 }
@@ -29,15 +53,8 @@ type ColorField {
   red: IntType!
 }
 
-type ContentWithImageModelTextField {
-  blocks: [String!]!
-  inlineBlocks: [String!]!
-  links: [String!]!
-  value: JsonField!
-}
-
-"""Block of type 🖼️ Content with image (content_with_image)"""
-type ContentWithImageRecord implements RecordInterface {
+"""Block of type 📞 Contact (contact_section)"""
+type ContactSectionRecord implements RecordInterface {
   _createdAt: DateTime!
 
   """Editing URL"""
@@ -56,16 +73,116 @@ type ContentWithImageRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  description(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  email: JsonField!
+  id: ItemId!
+  image: FileField!
+  phoneNumber: JsonField!
+  pill: String!
+  title: String!
+}
+
+type ContentWithImageSectionModelTextField {
+  blocks: [String!]!
+  inlineBlocks: [String!]!
+  links: [String!]!
+  value: JsonField!
+}
+
+"""Block of type 🖼️ Content with image (content_with_image_section)"""
+type ContentWithImageSectionRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  highlightedTopText: String
   id: ItemId!
   image: FileField!
   imagePosition: BooleanType!
-  text: ContentWithImageModelTextField!
+  pill: String!
+  text: ContentWithImageSectionModelTextField!
+  title: String!
 }
 
 scalar CustomData
 
 """A ISO 8601 compliant datetime value"""
 scalar DateTime
+
+"""Block of type FAQ item (faq_item)"""
+type FaqItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  answer(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  id: ItemId!
+  question: String!
+}
+
+"""Block of type ❓ FAQ (faq_section)"""
+type FaqSectionRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  description(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  id: ItemId!
+  items: [FaqItemRecord!]!
+  pill: String!
+  title: String!
+}
 
 enum FaviconType {
   icon
@@ -96,7 +213,7 @@ type FileField implements FileFieldInterface {
     """
     Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
     """
-    punch: Float! = 1
+    punch: Float! = 1.0
 
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
@@ -195,7 +312,7 @@ interface FileFieldInterface {
     """
     Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
     """
-    punch: Float! = 1
+    punch: Float! = 1.0
 
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
@@ -276,6 +393,31 @@ Represents signed double-precision fractional values as specified by [IEEE 754](
 """
 scalar FloatType
 
+"""Record of type Footer (footer)"""
+type FooterRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  footerText: String
+  id: ItemId!
+  logo: FileField!
+}
+
 type GlobalSeoField {
   facebookPageUrl: String
   fallbackSeo: SeoField
@@ -309,7 +451,40 @@ type HeaderRecord implements RecordInterface {
   logo: FileField!
 }
 
-union HomeModelBlocksField = ContentWithImageRecord | ImageBlockRecord | ImageGalleryBlockRecord | VideoBlockRecord
+"""Block of type 👑 Hero (hero_section)"""
+type HeroSectionRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  accent: String!
+  addButton: BooleanType!
+  button: ButtonRecord
+  id: ItemId!
+  image: FileField!
+  pill: String
+  shortIntroduction(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  title: String!
+}
+
+union HomeModelBlocksField = ContactSectionRecord | ContentWithImageSectionRecord | FaqSectionRecord | HeroSectionRecord | PricingSectionRecord | StepByStepSectionRecord
 
 type HomeModelIntroTextField {
   blocks: [String!]!
@@ -428,7 +603,7 @@ type ImageFileField implements FileFieldInterface {
     """
     Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
     """
-    punch: Float! = 1
+    punch: Float! = 1.0
 
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
@@ -502,30 +677,6 @@ type ImageFileField implements FileFieldInterface {
   ): String!
   video: UploadVideoField
   width: IntType!
-}
-
-"""Block of type 🎠 Image Gallery (image_gallery_block)"""
-type ImageGalleryBlockRecord implements RecordInterface {
-  _createdAt: DateTime!
-
-  """Editing URL"""
-  _editingUrl: String
-  _firstPublishedAt: DateTime!
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime!
-
-  """Generates SEO and Social card meta tags to be used in your frontend"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  assets: [ImageFileField!]!
-  id: ItemId!
 }
 
 input ImgixParams {
@@ -2541,10 +2692,29 @@ type LinkRecord implements RecordInterface {
 
 scalar MetaTagAttributes
 
+enum MuxThumbnailFitMode {
+  preserve
+  stretch
+  crop
+  smartcrop
+  pad
+}
+
 enum MuxThumbnailFormatType {
   jpg
   png
   gif
+}
+
+enum MuxThumbnailRotation {
+  """Rotate 90° clockwise"""
+  ROTATE_90
+
+  """Rotate 180° clockwise"""
+  ROTATE_180
+
+  """Rotate 270° clockwise"""
+  ROTATE_270
 }
 
 """Specifies how to filter by image orientation"""
@@ -2554,6 +2724,66 @@ input OrientationFilter {
 
   """Exclude uploads with the specified orientation"""
   neq: UploadOrientation
+}
+
+"""Block of type Pricing item (pricing_item)"""
+type PricingItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  description(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  highlight: BooleanType!
+  id: ItemId!
+  price: String!
+  title: String!
+}
+
+"""Block of type 💲 Pricing (pricing_section)"""
+type PricingSectionRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  description(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  id: ItemId!
+  pill: String!
+  prices: [PricingItemRecord!]!
+  title: String!
 }
 
 """The query root for this schema"""
@@ -2594,6 +2824,17 @@ type Query {
     filter: UploadFilter
     orderBy: [UploadOrderBy] = [_createdAt_DESC]
   ): [FileField!]!
+
+  """Returns the single instance record"""
+  footer(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+  ): FooterRecord
 
   """Returns the single instance record"""
   header(
@@ -2719,6 +2960,64 @@ type Site {
 enum SiteLocale {
   is
   en
+}
+
+"""Block of type 🚶‍♂️ Step by step (step_by_step_section)"""
+type StepByStepSectionRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  description(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  id: ItemId!
+  pill: String!
+  steps: [StepItemRecord!]!
+  title: String!
+}
+
+"""Block of type Step item (step_item)"""
+type StepItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime!
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime!
+
+  """Generates SEO and Social card meta tags to be used in your frontend"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  description(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String!
+  id: ItemId!
+  title: String!
 }
 
 input StringMatchesFilter {
@@ -3161,7 +3460,7 @@ type UploadVideoField {
     """
     Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
     """
-    punch: Float! = 1
+    punch: Float! = 1.0
 
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
@@ -3185,13 +3484,41 @@ type UploadVideoField {
   ): String
   muxAssetId: String!
   muxPlaybackId: String!
+
+  """
+  Default poster frame, in seconds into the video. Resolves to the record-level field override when present, otherwise the upload-level default. `null` means Mux's default (middle of the video).
+  """
+  posterTime: Float
   streamingUrl: String!
   thumbhash: String
   thumbnailUrl(
-    """
-    The file extension of the requested image format. Either png, jpg or gif
-    """
+    """The file extension of the requested image. Either jpg, png or gif"""
     format: MuxThumbnailFormatType = jpg
+
+    """
+    Maps to the Mux `time` param: seconds into the video to grab the frame. When omitted, the upload's poster time is auto-injected (not applied to gif)
+    """
+    time: Float
+
+    """Maps to the Mux `width` param: thumbnail width in pixels"""
+    width: Int
+
+    """Maps to the Mux `height` param: thumbnail height in pixels"""
+    height: Int
+
+    """
+    Maps to the Mux `fit_mode` param: how the image fits the given dimensions
+    """
+    fitMode: MuxThumbnailFitMode
+
+    """Maps to the Mux `rotate` param: clockwise rotation in degrees"""
+    rotate: MuxThumbnailRotation
+
+    """Maps to the Mux `flip_v` param: flip the image vertically"""
+    flipV: Boolean
+
+    """Maps to the Mux `flip_h` param: flip the image horizontally"""
+    flipH: Boolean
   ): String!
   title(
     """The locale to use to fetch the field's content"""
@@ -3273,7 +3600,7 @@ type VideoFileField implements FileFieldInterface {
     """
     Controls the "punch" value (~contrast) of the blurhash decoding algorithm (defaults to 1.0)
     """
-    punch: Float! = 1
+    punch: Float! = 1.0
 
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24

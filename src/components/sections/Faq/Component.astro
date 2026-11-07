@@ -1,0 +1,52 @@
+---
+import { SectionBadge } from '~/components/SectionBadge';
+
+interface Item {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro?: string;
+  items?: Item[];
+}
+
+const { eyebrow, title, intro, items = [] } = Astro.props;
+---
+
+<section id={eyebrow.replace(/ /g, '-').toLowerCase()} class="py-10 lg:py-16">
+  <div class="flex flex-col gap-10 lg:flex-row lg:items-start xl:gap-column">
+    <div class="flex flex-col items-start gap-6 lg:w-[385px] lg:shrink-0">
+      {eyebrow && <SectionBadge label={eyebrow} />}
+      <h2 class="text-secondary">{title}</h2>
+      {intro && <p class="text-body-sm text-muted">{intro}</p>}
+    </div>
+
+    <div class="flex flex-1 flex-col gap-6">
+      {
+        items.map((item, index) => (
+          <details
+            class="group rounded-panel border-2 border-secondary bg-surface shadow-hard-sm"
+            open={index === 0}
+          >
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-6 lg:px-8 [&::-webkit-details-marker]:hidden">
+              <span class="text-subtitle text-text">{item.question}</span>
+              <svg
+                class="size-[30px] shrink-0 fill-secondary transition-transform duration-200 group-open:rotate-180"
+                viewBox="0 0 30 30"
+                aria-hidden="true"
+              >
+                <path d="M15 20.4375L6.5625 12L8.5 10.0625L15 16.5625L21.5 10.0625L23.4375 12L15 20.4375Z" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-4 lg:px-8">
+              <div class="text-body-sm text-muted" set:html={item.answer} />
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

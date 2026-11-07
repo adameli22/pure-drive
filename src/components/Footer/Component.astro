@@ -1,0 +1,15 @@
+---
+import { Image } from 'astro:assets';
+import { readFragment } from '~/lib/datocms/graphql';
+import { FooterFragment } from './fragments.ts';
+
+const { data } = Astro.props;
+const unmaskedBlock = readFragment(FooterFragment, data);
+---
+
+<footer class="border-t border-line bg-background pb-14 pt-6">
+  <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+    <Image src={unmaskedBlock.logo.url} alt="Pure Drive" width={150} height={40} loading="lazy" />
+    <p class="text-sm text-muted">{unmaskedBlock.footerText}</p>
+  </div>
+</footer>

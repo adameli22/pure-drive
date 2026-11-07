@@ -1,0 +1,81 @@
+---
+import type { ComponentProps } from 'astro/types';
+import { ResponsiveImage } from '~/components/ResponsiveImage';
+
+interface Props {
+  image: {
+    id: string;
+    responsiveImage: ComponentProps<typeof ResponsiveImage>['data'] | null;
+  };
+  eyebrow?: string;
+  title?: string;
+  accent?: string;
+  intro?: string;
+  buttonBool?: boolean;
+  button?: any;
+}
+
+const { image, eyebrow, title, accent, intro, buttonBool, button } = Astro.props;
+
+// TODO: Create link component that manages the link data output
+
+const link = button?.link?.formatted;
+const ctaHref = link?.url;
+
+const ctaLabel = link?.text;
+const showCta = buttonBool !== false;
+
+const photo: any = image.responsiveImage;
+const photoData = photo ? { ...photo, alt: photo.alt || `${title ?? ''} ökukennari` } : null;
+
+const fillImage = {
+  width: '100%',
+  height: '100%',
+  maxWidth: 'none',
+  aspectRatio: 'auto',
+  objectFit: 'cover',
+};
+---
+
+<section class="flex flex-col items-center gap-10 pb-14 lg:flex-row lg:gap-20 lg:pb-24 lg:pt-10">
+  <div class="flex w-full flex-1 flex-col items-start gap-6 lg:gap-8">
+    <h1 class="text-secondary">
+      <span class="block">{title}</span>
+      <span class="block text-primary">{accent}</span>
+    </h1>
+
+    <p class="text-lead text-muted">{intro}</p>
+
+    {
+      showCta && (
+        <a
+          href={ctaHref}
+          class="inline-flex items-center justify-center rounded-control bg-primary px-8 py-[18px] text-body-sm font-bold text-secondary shadow-hard-sm hover:no-underline focus-visible:no-underline"
+        >
+          {ctaLabel}
+        </a>
+      )
+    }
+  </div>
+
+  <div class="relative flex w-full shrink-0 items-center justify-center lg:w-[512px]">
+    <span
+      class="absolute left-48 -top-32 -z-10 size-[260px] rounded-full bg-primary/15 lg:-left-[111px] md:-top-[79px] md:size-[400px]"
+      aria-hidden="true"></span>
+    <div
+      class="relative aspect-[513/642] w-full max-w-[420px] overflow-hidden rounded-card shadow-photo-lg [&_picture]:size-full sm:max-w-[460px] lg:max-w-[513px]"
+    >
+      {
+        photoData && (
+          <ResponsiveImage
+            data={photoData}
+            pictureClass="block size-full center"
+            imgStyle={fillImage}
+            imgClass="size-full object-cover"
+            priority={true}
+          />
+        )
+      }
+    </div>
+  </div>
+</section>

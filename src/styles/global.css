@@ -87,6 +87,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     max-width: var(--body-max-width);
     background-color: var(--color-background);
@@ -102,6 +105,11 @@
   header {
     padding: 20px;
   }
+
+  section {
+    scroll-margin-top: 90px;
+  }
+
   section,
   footer {
     max-width: 1200px;
@@ -111,7 +119,7 @@
     }
   }
   h1 {
-    font-size: 40px;
+    font-size: 52px;
     font-weight: var(--text-display--font-weight);
     line-height: 60px;
     letter-spacing: -1px;

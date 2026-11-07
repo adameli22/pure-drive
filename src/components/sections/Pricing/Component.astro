@@ -28,7 +28,7 @@ const { eyebrow, title, intro, plans = [] } = Astro.props;
         {intro && <p class="max-w-[700px] text-muted">{intro}</p>}
       </div>
 
-      <ul class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <ul class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {
           plans.map((plan) => (
             <li

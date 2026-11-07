@@ -8,7 +8,7 @@ interface Props {
 const { link, label, variant = 'desktop' } = Astro.props;
 ---
 
-<li class:list={[variant === 'mobile' && 'w-full', variant === 'desktop' && 'flex items-center']}>
+<li class:list={[variant === 'mobile' && 'w-full', variant === 'desktop' && 'p-[20px]']}>
   <a
     class:list={[
       'font-medium text-secondary',

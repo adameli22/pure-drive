@@ -13,8 +13,8 @@ const links = unmaskedBlock.headerLinks;
 //TODO make aria-labels and icon alt text dynamic with chosen language
 ---
 
-<header class="sticky z-50 top-0 bg-surface">
-  <div class="flex h-[60px] items-center justify-between lg:h-[120px]">
+<header id="header" class="sticky z-50 top-0 transition-colors duration-50 ease">
+  <div class="flex h-[60px] items-center justify-between lg:h-[90px]">
     <a href="/" class="shrink-0" aria-label="Pure Drive — forsíða">
       <Image
         src={unmaskedBlock.logo.url}
@@ -27,7 +27,7 @@ const links = unmaskedBlock.headerLinks;
     </a>
 
     <nav class="hidden lg:block" aria-label="Aðalvalmynd">
-      <ul class="flex items-center justify-evenly gap-[59px]">
+      <ul class="flex items-center justify-evenly">
         {
           links.map((item: any) => (
             <NavItem link={item.linkField.formatted.url} label={item.linkField.formatted.text} />
@@ -54,7 +54,7 @@ const links = unmaskedBlock.headerLinks;
     class="invisible absolute inset-x-0 top-full overflow-hidden h-0 transition-[height,visibility] duration-300 ease-out lg:hidden"
   >
     <div class="min-h-0">
-      <nav aria-label="Valmynd" class="rounded-panel bg-surface place-items-center">
+      <nav aria-label="Valmynd" class="bg-surface place-items-center">
         <ul class="flex flex-col h-svh w-fit text-center">
           {
             links.map((item: any) => (
@@ -71,11 +71,29 @@ const links = unmaskedBlock.headerLinks;
   </div>
 </header>
 
+<style>
+  .changeNavColor {
+    animation: changeBgColor;
+    animation-timeline: scroll;
+  }
+  @keyframes changeColor {
+  }
+</style>
+
 <script>
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   const openIcon = document.getElementById('menu-icon-open');
   const closeIcon = document.getElementById('menu-icon-close');
+  const header = document.getElementById('header');
+
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 50) {
+      header?.classList.add('bg-surface');
+    } else {
+      header?.classList.remove('bg-surface');
+    }
+  });
 
   const setMenu = (open: boolean) => {
     if (!menu || !toggle) return;
@@ -87,7 +105,7 @@ const links = unmaskedBlock.headerLinks;
 
     openIcon?.classList.toggle('hidden', open);
     closeIcon?.classList.toggle('hidden', !open);
-
+    header;
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Loka valmynd' : 'Opna valmynd');
   };

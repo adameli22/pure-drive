@@ -1,5 +1,6 @@
 ---
 import '~/styles/global.css';
+import lexendUrl from '~/assets/fonts/Lexend/Lexend-VariableFont_wght.woff2?url';
 import { TagFragment } from '~/lib/datocms/commonFragments';
 import { executeQuery } from '~/lib/datocms/executeQuery';
 import { graphql } from '~/lib/datocms/graphql';
@@ -43,12 +44,7 @@ const result = await executeQuery(query);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href={lexendUrl} as="font" type="font/woff2" crossorigin />
     <Seo data={[...result._site.faviconMetaTags, ...additionalSeo]} />
   </head>
   <body>

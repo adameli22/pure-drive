@@ -1,6 +1,5 @@
 import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
@@ -15,10 +14,7 @@ export default defineConfig({
       },
     },
   },
-  output: 'server',
-  security: {
-    checkOrigin: false,
-  },
+  output: 'static',
   env: {
     schema: {
       DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN: envField.string({

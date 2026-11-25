@@ -49,7 +49,7 @@ const result = await executeQuery(query);
   </head>
   <body>
     <Header data={result.header} />
-    <main>
+    <main class="max-lg:overflow-x-hidden">
       <slot />
     </main>
     <Footer data={result.footer} />

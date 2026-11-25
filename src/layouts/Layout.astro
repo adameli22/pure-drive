@@ -3,14 +3,11 @@ import '~/styles/global.css';
 import { TagFragment } from '~/lib/datocms/commonFragments';
 import { executeQuery } from '~/lib/datocms/executeQuery';
 import { graphql } from '~/lib/datocms/graphql';
-import { DraftModeToggler } from '~/components/DraftModeToggler';
 import { Header } from '~/components/Header';
 import { Footer } from '~/components/Footer';
 import { HeaderFragment } from '~/components/Header/fragments';
 import { FooterFragment } from '~/components/Footer/fragments';
 import { Seo, type TitleMetaLinkTag } from '@datocms/astro';
-import { isDraftModeEnabled } from '~/lib/draftMode';
-
 type Props = {
   additionalSeo?: TitleMetaLinkTag[];
 };
@@ -36,8 +33,7 @@ const query = graphql(
   [TagFragment, HeaderFragment, FooterFragment],
 );
 
-const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
-const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
+const result = await executeQuery(query);
 ---
 
 <!doctype html>

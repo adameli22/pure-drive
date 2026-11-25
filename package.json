@@ -21,6 +21,7 @@
     "@datocms/cda-client": "^0.2.10",
     "@datocms/cma-client": "^6.8.0",
     "@mux/mux-player": "^2.9.1",
+    "@playform/compress": "^0.2.5",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",

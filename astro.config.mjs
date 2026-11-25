@@ -44,5 +44,11 @@ export default defineConfig({
     },
     validateSecrets: true,
   },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap(),
+    (await import('@playform/compress')).default({
+      Path: ['./dist'],
+    }),
+  ],
 });

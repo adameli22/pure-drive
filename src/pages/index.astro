@@ -13,8 +13,6 @@ import { FaqSectionFragment } from '~/components/sections/Faq/fragments';
 import { PricingSectionFragment } from '~/components/sections/Pricing/fragments';
 import { StepByStepSectionFragment } from '~/components/sections/StepByStep/fragments';
 
-import { isDraftModeEnabled } from '../lib/draftMode';
-
 const query = graphql(
   /* GraphQL */ `
     query BasicPageQuery {
@@ -62,8 +60,7 @@ const query = graphql(
     ResponsiveImageFragment,
   ],
 );
-const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
-const { page } = await executeQuery(query, { includeDrafts: draftModeEnabled });
+const { page } = await executeQuery(query);
 
 if (!page) {
   return new Response(null, {

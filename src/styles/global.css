@@ -11,7 +11,8 @@
 
 @theme {
   /* ── Colors ──────────────────────────────────────────────── */
-  --color-primary: #e3a159; /* Figma: Yellow */
+  --color-primary: #e3a159; /* Figma: Yellow — fills, badges, shadows */
+  --color-primary-ink: #a1611b; /* Yellow for TEXT on light bg — 4.87:1 on #fdfdfd, 4.72:1 on #fdf9f3 (WCAG AA) */
   --color-secondary: #12293c; /* Figma: Dark blue */
   --color-background: #fdfdfd;
   --color-surface: #ffffff; /* card fills */
